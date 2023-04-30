@@ -1,6 +1,8 @@
 package com.example.practica_metodos.Servlets;
 
 import com.example.practica_metodos.models.Producto;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +14,9 @@ import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "postman",value = {"/servlet-postman"})
 public class ServletPostMan extends HttpServlet {
+    @Inject
+    @Named
+    Producto producto;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -40,7 +45,7 @@ public class ServletPostMan extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setHeader("refresh", "1");
-        Producto producto = new Producto(2l,"camion","transporte",5490288l);
+        producto = new Producto(2l,"camion","transporte",5490288l);
         try (PrintWriter out = resp.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");

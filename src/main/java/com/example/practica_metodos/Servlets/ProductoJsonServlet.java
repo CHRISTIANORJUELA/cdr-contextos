@@ -1,5 +1,7 @@
 package com.example.practica_metodos.Servlets;
 
+import com.example.practica_metodos.annotations.Qualifierun;
+import com.example.practica_metodos.enums.TypeClass;
 import com.example.practica_metodos.models.Producto;
 import com.example.practica_metodos.services.ProductoService;
 import com.example.practica_metodos.services.ProductoServiceImpl;
@@ -20,14 +22,19 @@ import java.util.List;
 @WebServlet("/productos.json")
 public class ProductoJsonServlet extends HttpServlet {
 
+
     @Inject
-    @Named("productoServiceImpl")
+    @Qualifierun(getValue = TypeClass.PRODUCT)
     ProductoService productoService;
+
+    @Inject
+    @Named
+    Producto producto;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ServletInputStream jsonStream = req.getInputStream();
         ObjectMapper mapper = new ObjectMapper();
-        Producto producto = mapper.readValue(jsonStream, Producto.class);
+        producto = mapper.readValue(jsonStream, Producto.class);
         resp.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = resp.getWriter()) {
 

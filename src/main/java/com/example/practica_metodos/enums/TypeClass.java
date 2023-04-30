@@ -1,5 +1,5 @@
 package com.example.practica_metodos.enums;
 
-public class TypeClass {
-
+public enum TypeClass {
+    PRODUCT,LOGIN
 }

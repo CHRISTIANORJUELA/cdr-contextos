@@ -1,0 +1,10 @@
+@Qualifier: Si tenemos más de un bean que implementa un tipo de bean
+ en particular, el punto de inyección puede especificar exactamente
+ qué bean se debe inyectar mediante una anotación de calificador.
+
+ @Alternative:Si tenemos más de un bean que implementa un tipo de bean en particular,
+  el punto de inyección puede especificar exactamente qué bean se debe inyectar mediante
+  una anotación de calificador.
+
+  @Named:Sirve para identificar una clase y asignarle un nombre si no
+  se le da por defecto toma el nombre de la clase

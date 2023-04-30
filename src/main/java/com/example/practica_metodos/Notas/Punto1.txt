@@ -12,3 +12,6 @@
 
  @RequestScoped:Una clase definida como @RequestScoped se instancia por cada cada
  petición y es compratida por todos los beans que la inyectan a lo largo la solicitud
+
+ @ConversationScoped: similar a @SessionScoped pero con la diferencia que
+  no se comparte la informacion entre pestañas como lo lo haria @SessionScoped
