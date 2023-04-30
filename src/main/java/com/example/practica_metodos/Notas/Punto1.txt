@@ -1,0 +1,14 @@
+@Dependent: Cada vez que solicitamos una
+ instancia de la clase de crea una nueva
+
+ @AplicationScoped:Cuando la aplicación arranca
+ crea una unica instancia de esa clase y por lo tanto
+ siempre se inyecta la misma
+
+
+ @SessionScoped:Una clase que se define como sesión scope se instancia una vez
+ para cada HTTPsesion y es compartido por todos los beans que lo inyectan
+ a lo largo de la misma HTTPsession
+
+ @RequestScoped:Una clase definida como @RequestScoped se instancia por cada cada
+ petición y es compratida por todos los beans que la inyectan a lo largo la solicitud

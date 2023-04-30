@@ -4,6 +4,8 @@ import com.example.practica_metodos.models.Producto;
 import com.example.practica_metodos.services.ProductoService;
 import com.example.practica_metodos.services.ProductoServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,6 +19,10 @@ import java.util.List;
 
 @WebServlet("/productos.json")
 public class ProductoJsonServlet extends HttpServlet {
+
+    @Inject
+    @Named("productoServiceImpl")
+    ProductoService productoService;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ServletInputStream jsonStream = req.getInputStream();
@@ -46,8 +52,7 @@ public class ProductoJsonServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-        ProductoService service = new ProductoServiceImpl();
-        List<Producto> productos = service.listar();
+        List<Producto> productos = productoService.listar();
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(productos);
         HttpSession httpSession = req.getSession();

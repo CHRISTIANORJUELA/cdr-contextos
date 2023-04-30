@@ -1,9 +1,11 @@
 package com.example.practica_metodos.Servlets;
 
-import com.example.practica_metodos.controllers.ModelFactoryController;
 import com.example.practica_metodos.models.Producto;
 import com.example.practica_metodos.services.LoginService;
 import com.example.practica_metodos.services.LoginServiceImpl;
+import com.example.practica_metodos.services.ProductoService;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,7 +24,13 @@ public class LoginServlet extends HttpServlet {
     private final String userName = "Maria";
     private final String password = "5";
 
-    ModelFactoryController mfc = ModelFactoryController.getInstance();
+    @Inject
+    @Named("productoServiceImpl")
+    ProductoService productoService;
+
+    @Inject
+    @Named("loginServiceImpl")
+    LoginService loginService;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp){
      String userName = req.getParameter("username");
@@ -65,15 +73,13 @@ public class LoginServlet extends HttpServlet {
     //<a href="/login.html">login</a>
     @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException  , IOException {
-            LoginService auth = new LoginServiceImpl();
             List<Producto> list;
-            ServletContext servletContext = getServletContext();
-            Optional<String> cookieOptional = auth.getUsername(req);
+            Optional<String> cookieOptional = loginService.getUsername(req);
             System.out.println(cookieOptional.get() != null ? cookieOptional.get() :"no existe");
             if (cookieOptional.isPresent()) {
                 resp.setContentType("text/html;charset=UTF-8");
                 try (PrintWriter out = resp.getWriter()) {
-                    list = mfc.listar();
+                    list = productoService.listar();
                     out.println("<!DOCTYPE html>");
                     out.println("<html>");
                     out.println(" <head>");

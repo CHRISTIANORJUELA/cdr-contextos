@@ -3,6 +3,8 @@ package com.example.practica_metodos.Servlets;
 import com.example.practica_metodos.models.Producto;
 import com.example.practica_metodos.services.ProductoService;
 import com.example.practica_metodos.services.ProductoServiceImpl;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,11 +15,11 @@ import java.io.*;
 import java.util.List;
 @WebServlet(name = "Producto-servlet",value = {"/productos.xls", "/productos.html", "/productos"})
 public class ProductoXlsServlet extends HttpServlet {
-
-
+    @Inject
+    @Named("productoServiceImpl")
+    ProductoService productoService;
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductoService service = new ProductoServiceImpl();
-        List<Producto> productos = service.listar();
+        List<Producto> productos = productoService.listar();
         resp.setContentType("text/html;charset=UTF-8");
         String servletPath = req.getServletPath();
         boolean esXls = servletPath.endsWith(".xls");

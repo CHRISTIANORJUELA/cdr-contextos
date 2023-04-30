@@ -1,12 +1,15 @@
 package com.example.practica_metodos.services;
 
 import com.example.practica_metodos.models.Producto;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 
 import java.util.Arrays;
 import java.util.List;
 
 
-
+@ApplicationScoped
+@Named("productoServiceImpl")
 public class ProductoServiceImpl implements ProductoService{
     @Override
     public List<Producto> listar() {

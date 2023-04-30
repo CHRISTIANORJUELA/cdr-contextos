@@ -1,10 +1,12 @@
 package com.example.practica_metodos.models;
 
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 
 import java.io.Serializable;
 
 @SessionScoped
+@Named
 public class Carro implements Serializable {
     private String color;
     private String type;

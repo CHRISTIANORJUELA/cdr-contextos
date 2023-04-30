@@ -1,8 +1,10 @@
 package com.example.practica_metodos.Servlets;
 
-import com.example.practica_metodos.controllers.ModelFactoryController;
 import com.example.practica_metodos.exeptions.ServiceJdbcException;
 import com.example.practica_metodos.models.Producto;
+import com.example.practica_metodos.services.ProductoService;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,11 +16,13 @@ import java.util.Optional;
 
 @WebServlet("/buscarProducto")
 public class BuscarProductoServlet extends HttpServlet {
-    ModelFactoryController mfc = ModelFactoryController.getInstance();
+    @Inject
+    @Named("productoServiceImpl")
+    ProductoService productoService;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("idproducto"));
-        Optional<Producto> obj = mfc.listar().stream().filter(x-> x.getId()==id).findFirst();
+        Optional<Producto> obj = productoService.listar().stream().filter(x-> x.getId()==id).findFirst();
         obj.ifPresentOrElse( x -> {
                System.out.println(x);
                req.setAttribute("obj",x);

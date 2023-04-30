@@ -1,9 +1,11 @@
 package com.example.practica_metodos.models;
 
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 
 import java.io.Serializable;
 @SessionScoped
+@Named
 public class Producto implements Serializable {
     private float id;
     private String name;
