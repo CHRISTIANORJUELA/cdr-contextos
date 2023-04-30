@@ -18,7 +18,7 @@ import java.util.Optional;
 public class BuscarProductoServlet extends HttpServlet {
     @Inject
     @Named("productoServiceImpl")
-    ProductoService productoService;
+    ProductoService productoService ;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("idproducto"));
